@@ -1,0 +1,73 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contacts": "Contacts",
+    "articles": "Articles",
+    "en": "English",
+    "ua": "Ukrainian",
+    "ru": "Russian",
+    "language": "En"
+  },
+  "main": {
+    "home": {
+      "title": "Front-end Engineer",
+      "subTitle": "Hi! I'm Serhii Andriievskiy. A passionate Front-end Engineer",
+      "stack": "Tech Stack"
+    },
+    "about": {
+      "title": "about me",
+      "subTitle": "A dedicated Front-end Engineer",
+      "text": "I build web interfaces using Next.js, guided by principles of clean architecture and business efficiency. I believe that quality code is predictable code that solves real user problems, not just a set of technologies."
+    },
+    "projects": {
+      "title": "projects",
+      "subTitle": "Each project is a unique piece of development",
+      "code": "Code",
+      "demo": "Live Demo",
+      "watop": {
+        "title": "WATOP",
+        "text": "<strong>WATOP is an e-commerce</strong> product for selling confectionery. The main focus is on <strong>SEO optimization</strong>, usability, and security, ensured through the implementation of <strong>JWT authentication</strong> and the creation of high-quality <strong>UI/UX</strong>."
+      },
+      "aat": {
+        "title": "AAT",
+        "text": "<strong>AAT is a B2B Amazon product metrics aggregator</strong> that enables users to build a <strong>custom analytics suite</strong> and tailor their workspace. The platform features <strong>automated scheduling</strong> for notifications and promotion payments, eliminating the need for sellers to manually manage tasks during off-hours to align with the US market."
+      }
+    }
+  },
+  "articles": {
+    "title": "Articles",
+    "subTitle": "Here you can see the train of my thoughts",
+    "articles": {
+      "codeQuality": {
+        "title": "Code Quality",
+        "text": "<strong>I've been diving deep into Code Quality principles lately.</strong>\nIt's easy to think quality is just about using the right tools (ESLint, Prettier), but I've learned it goes much deeper. Here is what I've added to my understanding:\n\n<strong>1. Validating risks before coding</strong>\nI realized that quality starts before we write code. It’s about asking the right questions:\n<ul><li>Will this feature break existing logic?</li>\n<li>Does this actually solve a real user problem?</li></ul>High-quality code is predictable code. It shouldn't create side effects.\n\n<strong>2. Thinking about flexibility</strong>\nI learned that \"good architecture\" isn't just a buzzword. It's about making sure we can change a feature in a month without rewriting everything from scratch.\nIf the answer is \"no, we can't extend this,\" then the architecture has failed.\n\n<strong>3. Tools are \"insurance,\" not the solution</strong>\nTypeScript and linters won't fix bad architecture. They are just \"safety fuses\" to help us stick to the decisions we made.\n\n\uD83D\uDE80 <strong>My takeaway:</strong>\nFrom now on, I’ll force myself to ask two questions before writing code:\n<ul><li>How can I make sure this doesn't break in a week?</li>\n<li>How can I make sure another developer can extend this?</li></ul>"
+      },
+      "businessMindset": {
+        "title": "Thinking Beyond Just Code",
+        "text": "Recently, I had a realization. I was trying to improve my \"business mindset,\" but it felt too abstract. I had the knowledge, but I didn't know how to apply it.\nI decided to change my perspective. Instead of asking \"How do I write code?\", I started asking \"How does my code help the product?\"\nI looked at the hiring process differently:\n<ul><li><strong>HR Screening:</strong> It's not just about listing skills (React, TS). It's about showing how I can help the team.</li>\n<li><strong>Technical Interview:</strong> It's not just an exam. It's a discussion about how technology solves problems.</li></ul>\n<strong>Example: The <code>useEffect</code> Cleanup</strong>\nA typical answer about <code>useEffect</code> is: \"There's mount, update, and unmount.\"\nI learned to look deeper. The <strong>cleanup function</strong> isn't just syntax. If we don't clean up, we get memory leaks. On low-end devices, this leads to crashes. A crash means a user loses their work or leaves the app.\n\n<strong>My Takeaway:</strong>\nWriting this helps me reinforce these lessons. I'm learning that being a developer isn't just about syntax — it's about understanding the impact of every line of code."
+      },
+      "restParadox": {
+        "title": "The Rest Paradox",
+        "text": "In the modern world, more and more people are resting — and <strong>burning out more than ever</strong>. I've collected a couple of my own techniques here that help me stay effective.\n\nThe most important thing to understand: <strong>peak productivity for complex tasks is the first 4 hours</strong>. Biologically, I can work up to 6, but even that still doesn't match a standard workday. After that, efficiency inevitably drops. The key is not to try to squeeze out extra strength for one last push, because you're <strong>borrowing energy from the next day</strong>. This leads to <strong>brain fog, laziness</strong>, and thoughts of doing something else.\n\nThe second point is \"rest\": <strong>video games, YouTube videos, TikTok</strong>, etc. At the brain level, this is <strong>the same kind of work</strong>. The brain uses the same regions that are active during actual work — you're just switching from one task to another, more entertaining one. This is where many people fall into a loop: they get tired → go play → <strong>don't restore energy</strong> → the brain screams that it's tired again.\n\n(A short aside: the brain has two phases. <strong>TPN</strong> — a phase of active work that suppresses other processes. And <strong>DMN</strong> — which is responsible for rest and processing. Each phase suppresses the other, and it's crucial to manage them correctly.)\n\n<strong>True recovery happens only when we \"do nothing.\"</strong> This is when the DMN turns on. Only in this mode does the brain transfer information from the <strong>hippocampus</strong> to the <strong>cortex</strong> and \"clean up\" neurons. The most important time is <strong>the first 20 minutes</strong> after intense cognitive work.\n\nThe key thing is that you don't feel boredom. The biological nature of boredom is a signal of information deprivation. But if you've just finished a complex task, your brain is loaded with data. While you sit still, the DMN is actively working, <strong>\"digesting\" this mass of information</strong>. Boredom simply doesn't have time to kick in.\n\nSports are also one of the strongest tools against fatigue. Physical activity forcibly knocks the nervous system out of the TPN phase: blood flows away from the prefrontal cortex, and the brain switches modes. During intense muscle activity, muscles produce <strong>lactate — a super fuel</strong> that is far more energy-efficient for the brain than glucose — so the brain recovers much more effectively after training."
+      },
+      "readingDocumentation": {
+        "title": "Reading Documentation",
+        "text": "Technologies are updating faster than we manage to finish reading. If you try to learn everything from cover to cover, you can burn out before the first line of code.\n\nI'm a fan of optimization, so I try to improve any process I work with. Right now, I've found an <strong>\"aggressive learning\" approach</strong> that helps me learn faster.\n\n<strong>My process is divided into Theory and Practice:</strong><strong>\nTheory: \"Knowledge skeleton\" through AI</strong>\nInstead of reading all sections in a row, I ask ChatGPT or Gemini to create a roadmap: \"What do you need to know about this technology for a Middle level?\" I get a summary, write down unfamiliar terms, and go deeper into each of them. This cuts out <strong>80% of the \"water\"</strong> that is rarely used in real work.\n\n<strong>Practice: The \"Snowball\" method</strong>\nI don't copy examples from the docs. I immediately create an empty project and set a micro-goal.\n\nUsing ThreeJS as an example:\n<ul><li><strong>Step 1:</strong> Just render a cube on the scene.</li><li><strong>Step 2:</strong> Replace the cube with a complex car model.</li><li><strong>Step 3:</strong> Add camera rotation around the model.</li><li><strong>Step 4:</strong> Add camera rotation during idle time.</li></ul>\n<strong>Final:</strong> Make a 3D model of an apartment with furniture placement.\n\nEach task is slightly more difficult than the previous one. This way I learn to solve real problems, and I look into the documentation only selectively — when something doesn't work.\n\n<strong>Second brain (Obsidian)</strong>\nMemory is not infinite. I write down everything important in Obsidian, but with a strict filter: I save only what will really be useful. The Pareto principle: <strong>20% of knowledge covers 80% of tasks</strong>. The rest is \"trash\" that only clutters the brain.\n\nOf course, the foundation is health and discipline. Without them, any system will collapse. But if you add regularity and optimization to this, you get the perfect cocktail for rapid growth."
+      },
+      "AIStandard": {
+        "title": "The Illusion of Standard AI",
+        "text": "I used to think ChatGPT and Gemini were getting \"dumber.\" The answers felt generic, safe, and often missed the point. I realized the problem wasn't the model itself, but how it's packaged for the mass market.\n\nStandard models are heavily restricted. Companies optimize them to be \"helpful assistants\" that prioritize user satisfaction over raw truth. This leads to <strong>smoothed corners and generic advice</strong> — the model gives you the answer you *want*, not the one you *need*.\n\nTo unlock real potential, I started writing custom instructions. It’s not just prompting; it’s engineering the model's behavior.\n\n<strong>What I learned:</strong><ul><li><strong>Mixture of Experts:</strong> Models aren't one giant brain. They are clusters of \"experts.\" Standard prompts often activate generic pathways. Specific instructions force the model to route the query to the right \"expert,\" bypassing the noise.</li><li><strong>Fighting Generalization:</strong> Without strict context, models drift. I learned to define the role, tone, and constraints explicitly to prevent the AI from defaulting to \"average.\"</li></ul>But the most critical lesson was understanding <strong>limitations</strong>.\nModels don't just \"know\" things; they predict. If a task is too complex, they might <strong>hallucinate</strong> or invent non-existent libraries just to satisfy the instruction. I learned to anticipate this: I break down complex tasks and explicitly forbid shortcuts in my prompts.\n\nAI is a powerful tool, but only if you know how to drive it. Otherwise, you're just a passenger in a self-driving car going the wrong way."
+      }
+    }
+  },
+  "footer": {
+    "title": "contacts",
+    "subTitle": "Don't be shy! Hit me up",
+    "email": "Email",
+    "telegram": "Telegram",
+    "resume": "My resume",
+    "resumeUrl": "Andriievskyi_Front-end_EN"
+  }
+}

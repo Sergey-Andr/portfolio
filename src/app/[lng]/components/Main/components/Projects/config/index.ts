@@ -1,5 +1,6 @@
 import aat from "../../../../../../../../public/AAT.webp";
 import watop from "../../../../../../../../public/watop.webp";
+import verso from "../../../../../../../../public/verso.png";
 import {StaticImageData} from "next/dist/shared/lib/get-img-props";
 
 interface IProjects {
@@ -10,6 +11,15 @@ interface IProjects {
 }
 
 export const projects: IProjects[] = [
+    {
+        name: "verso",
+        stack: ["Next.js", "Tailwind CSS"],
+        links: {
+            git: "https://github.com/Sergey-Andr/Verso",
+            demo: "https://esverso.com",
+        },
+        photo: verso as StaticImageData,
+    },
     {
         name: "watop",
         stack: ["Next.js", "Tailwind CSS"],

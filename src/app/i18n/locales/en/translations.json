@@ -33,6 +33,10 @@
       "aat": {
         "title": "AAT",
         "text": "<strong>AAT is a B2B Amazon product metrics aggregator</strong> that enables users to build a <strong>custom analytics suite</strong> and tailor their workspace. The platform features <strong>automated scheduling</strong> for notifications and promotion payments, eliminating the need for sellers to manually manage tasks during off-hours to align with the US market."
+      },
+      "verso": {
+        "title": "Verso",
+        "text": "Verso — a weather analytics platform featuring real-time data and a responsive UI tailored for various device types. It implements a custom scroll engine, a Canvas 2D particle renderer for precipitation visualization, and a two-tier cache to minimize external API requests. Production: Lighthouse 96, LCP 1s, CLS 0, TBT 0."
       }
     }
   },

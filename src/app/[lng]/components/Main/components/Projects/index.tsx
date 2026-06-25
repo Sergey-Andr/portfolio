@@ -26,7 +26,7 @@ export default async function Projects({language}: { language: TFunction }) {
                             <ImageLightbox
                                 src={project.photo}
                                 alt={language(`main.${project.name}.title`)}
-                                className="min-w-96 max-w-lg quad:max-w-2xl max-lg:w-96 max-sm:w-full rounded-xl"
+                                className="min-w-96 max-w-lg max-h-64 quad:max-w-2xl max-lg:w-96 max-sm:w-full rounded-xl object-cover object-contain"
                             />
                         </aside>
                         <div className="w-full flex items-center justify-center">

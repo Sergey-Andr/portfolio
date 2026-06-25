@@ -33,6 +33,10 @@
       "aat": {
         "title": "AAT",
         "text": "<strong>AAT</strong> — <strong>B2B агрегатор метрик товаров</strong> с Amazon, позволяющий пользователям формировать <strong>кастомный набор аналитики</strong> и адаптировать рабочий интерфейс под себя. Реализована функция <strong>автоматического планирования</strong> рассылок и оплат продвижения, что исключает необходимость ручного управления в неурочное время для синхронизации с американским рынком."
+      },
+      "verso": {
+        "title": "Verso",
+        "text": "<strong>Verso</strong> — weather analytics platform з real-time даними та адаптивним UI під різні типи пристроїв. Реалізовано <strong>кастомний рушій скролу</strong>, <strong>Canvas 2D particle renderer</strong> для візуалізації опадів і <strong>дворівневий кеш</strong> для мінімізації зовнішніх API-запитів. Production: <strong>Lighthouse 96, LCP 1s, CLS 0, TBT 0.</strong>"
       }
     }
   },

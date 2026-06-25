@@ -36,7 +36,7 @@
       },
       "verso": {
         "title": "Verso",
-        "text": "Verso — a weather analytics platform featuring real-time data and a responsive UI tailored for various device types. It implements a custom scroll engine, a Canvas 2D particle renderer for precipitation visualization, and a two-tier cache to minimize external API requests. Production: Lighthouse 96, LCP 1s, CLS 0, TBT 0."
+        "text": "<strong>Verso</strong> — a weather analytics platform featuring real-time data and a responsive UI tailored for various device types. It implements a <strong>custom scroll engine</strong>, a <strong>Canvas 2D particle renderer</strong> for precipitation visualization, and a <strong>two-tier cache</strong> to minimize external API requests. Production: <strong>Lighthouse 96, LCP 1s, CLS 0, TBT 0.</strong>"
       }
     }
   },

@@ -6,7 +6,7 @@ export default function Header({language}: { language: TFunction }) {
     return (
         <>
             <header
-                className="w-full h-16 flex max-lg:bg-white max-lg:z-50 max-sm:hidden items-center justify-between sticky top-0 backdrop-blur-sm">
+                className="w-full h-16 flex z-40 max-lg:bg-white max-lg:z-50 max-sm:hidden items-center justify-between sticky top-0 backdrop-blur-sm">
                 <p className="text-2xl quad:text-4xl max-lg:text-xl font-bold">
                     Serhii.dev
                 </p>

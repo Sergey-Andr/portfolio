@@ -43,6 +43,23 @@ export const projects: IProjects[] = [
             demo: "https://watop.vercel.app/",
         },
         cover: watop as StaticImageData,
+        media: [
+            {
+                type: "video",
+                src: "/projects/watop/purchase.mp4",
+                poster: "/projects/watop/purchase-poster.webp",
+            },
+            {
+                type: "video",
+                src: "/projects/watop/search.mp4",
+                poster: "/projects/watop/search-poster.webp",
+            },
+            {
+                type: "video",
+                src: "/projects/watop/account.mp4",
+                poster: "/projects/watop/account-poster.webp",
+            },
+        ],
     },
     {
         name: "aat",

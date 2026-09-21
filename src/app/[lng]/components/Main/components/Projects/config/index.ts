@@ -65,5 +65,22 @@ export const projects: IProjects[] = [
         name: "aat",
         stack: ["React", "Material UI"],
         cover: aat as StaticImageData,
+        media: [
+            {
+                type: "video",
+                src: "/projects/aat/dashboard.mp4",
+                poster: "/projects/aat/dashboard-poster.webp",
+            },
+            {
+                type: "video",
+                src: "/projects/aat/schedule.mp4",
+                poster: "/projects/aat/schedule-poster.webp",
+            },
+            {
+                type: "video",
+                src: "/projects/aat/tables.mp4",
+                poster: "/projects/aat/tables-poster.webp",
+            },
+        ],
     },
 ];

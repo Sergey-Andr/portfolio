@@ -33,7 +33,8 @@ export default async function Projects({language}: { language: TFunction }) {
                     >
                         <aside className="w-[32rem] shrink-0 quad:w-[42rem] max-lg:w-96 max-sm:w-full max-sm:mb-4">
                             <ImageLightbox
-                                images={project.photos}
+                                cover={project.cover}
+                                media={project.media}
                                 alt={language(`main.projects.${project.name}.title`)}
                                 labels={lightboxLabels}
                                 className="aspect-[2/1] w-full h-auto object-cover object-top"

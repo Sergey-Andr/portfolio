@@ -1,20 +1,25 @@
 "use client";
 
 import * as React from "react";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import {Dialog as DialogPrimitive} from "radix-ui";
 import {cn} from "@/lib/utils";
 import {StaticImageData} from "next/dist/shared/lib/get-img-props";
-import {ChevronLeft, ChevronRight, Maximize2, XIcon} from "lucide-react";
+import {ChevronLeft, ChevronRight, Maximize2, Play, XIcon} from "lucide-react";
 
 const SWIPE_THRESHOLD = 50;
 
 const arrowClassName =
     "absolute top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition duration-200 hover:border-sky-400 hover:bg-black/60 focus-visible:border-sky-400 focus-visible:outline-none";
 
+export type ProjectMedia =
+    | { type: "image"; src: StaticImageData }
+    | { type: "video"; src: string; poster: string };
+
 interface ImageLightboxProps {
-    images: StaticImageData[];
+    cover: StaticImageData;
+    media?: ProjectMedia[];
     alt: string;
     labels: { open: string; prev: string; next: string };
     width?: number;
@@ -22,8 +27,58 @@ interface ImageLightboxProps {
     className?: string;
 }
 
+function Slide({item, alt, active}: { item: ProjectMedia; alt: string; active: boolean }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        if (!active) {
+            video.pause();
+            return;
+        }
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        video.currentTime = 0;
+        video.play().catch(() => undefined);
+    }, [active]);
+
+    const className = cn(
+        "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+        active ? "opacity-100" : "opacity-0",
+    );
+
+    if (item.type === "video") {
+        return (
+            <video
+                ref={videoRef}
+                src={item.src}
+                poster={item.poster}
+                aria-label={alt}
+                aria-hidden={!active}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className={className}
+            />
+        );
+    }
+
+    return (
+        <Image
+            src={item.src}
+            alt={alt}
+            fill
+            aria-hidden={!active}
+            className={className}
+            sizes="100vw"
+        />
+    );
+}
+
 export function ImageLightbox({
-                                  images,
+                                  cover,
+                                  media,
                                   alt,
                                   labels,
                                   width = 800,
@@ -33,10 +88,12 @@ export function ImageLightbox({
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(0);
     const touchStartX = useRef<number | null>(null);
-    const hasMany = images.length > 1;
+    const slides: ProjectMedia[] = media ?? [{type: "image", src: cover}];
+    const hasMany = slides.length > 1;
+    const hasVideo = slides.some((item) => item.type === "video");
 
     const show = (next: number) =>
-        setIndex((next + images.length) % images.length);
+        setIndex((next + slides.length) % slides.length);
 
     const onOpenChange = (value: boolean) => {
         if (value) setIndex(0);
@@ -76,7 +133,7 @@ export function ImageLightbox({
                     className="group relative block w-full cursor-pointer overflow-hidden rounded-xl border border-black/10 bg-black/[0.03] transition duration-200 ease-in-out hover:-translate-y-0.5 hover:border-sky-400/60 hover:shadow-[0_8px_24px_-8px_rgba(56,189,248,0.45)] focus-visible:-translate-y-0.5 focus-visible:border-sky-400 focus-visible:outline-none motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                     <Image
-                        src={images[0]}
+                        src={cover}
                         alt={alt}
                         width={width}
                         height={height}
@@ -86,8 +143,9 @@ export function ImageLightbox({
                         aria-hidden
                         className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full border border-black/10 bg-white/90 px-2.5 py-1 text-xs font-medium text-black/70 opacity-0 transition duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
                     >
+                        {hasVideo ? <Play className="h-3.5 w-3.5 fill-current"/> : null}
                         <Maximize2 className="h-3.5 w-3.5"/>
-                        {hasMany ? images.length : null}
+                        {hasMany ? slides.length : null}
                     </span>
                 </button>
             </DialogPrimitive.Trigger>
@@ -105,18 +163,12 @@ export function ImageLightbox({
                 >
                     <DialogPrimitive.Title className="sr-only">{alt}</DialogPrimitive.Title>
                     <div className="relative w-[80vw] h-[82vh] max-sm:w-[94vw] max-sm:h-[70vh]">
-                        {images.map((image, i) => (
-                            <Image
-                                key={image.src}
-                                src={image}
-                                alt={hasMany ? `${alt} ${i + 1}/${images.length}` : alt}
-                                fill
-                                aria-hidden={i !== index}
-                                className={cn(
-                                    "object-contain transition-opacity duration-300",
-                                    i === index ? "opacity-100" : "opacity-0",
-                                )}
-                                sizes="100vw"
+                        {slides.map((item, i) => (
+                            <Slide
+                                key={i}
+                                item={item}
+                                alt={hasMany ? `${alt} ${i + 1}/${slides.length}` : alt}
+                                active={i === index}
                             />
                         ))}
                     </div>
@@ -143,11 +195,11 @@ export function ImageLightbox({
                                 onClick={(e) => e.stopPropagation()}
                                 className="absolute bottom-6 left-1/2 flex -translate-x-1/2 cursor-default items-center gap-2 rounded-full bg-black/40 px-3 py-1.5"
                             >
-                                {images.map((image, i) => (
+                                {slides.map((item, i) => (
                                     <button
-                                        key={image.src}
+                                        key={i}
                                         type="button"
-                                        aria-label={`${i + 1}/${images.length}`}
+                                        aria-label={`${i + 1}/${slides.length}`}
                                         aria-current={i === index}
                                         onClick={(e) => slide(e, i)}
                                         className={cn(

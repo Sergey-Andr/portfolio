@@ -5,3 +5,116 @@
 html:has(body[data-scroll-locked]) {
     overflow: hidden;
 }
+
+@property --blob-top {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 64%;
+}
+
+@property --blob-bottom {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 36%;
+}
+
+@property --blob-left {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 64%;
+}
+
+@property --blob-right {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 36%;
+}
+
+@property --blob-spin-slow {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --blob-spin-fast {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --blob-float-fast {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --blob-float-slow {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@keyframes blob-top {
+    from { --blob-top: 64%; }
+    to { --blob-top: 36%; }
+}
+
+@keyframes blob-bottom {
+    from { --blob-bottom: 36%; }
+    to { --blob-bottom: 64%; }
+}
+
+@keyframes blob-left {
+    from { --blob-left: 64%; }
+    to { --blob-left: 36%; }
+}
+
+@keyframes blob-right {
+    from { --blob-right: 36%; }
+    to { --blob-right: 64%; }
+}
+
+@keyframes blob-spin-slow {
+    from { --blob-spin-slow: -3deg; }
+    to { --blob-spin-slow: 3deg; }
+}
+
+@keyframes blob-spin-fast {
+    from { --blob-spin-fast: 2deg; }
+    to { --blob-spin-fast: -2deg; }
+}
+
+@keyframes blob-float-fast {
+    from { --blob-float-fast: -4px; }
+    to { --blob-float-fast: 4px; }
+}
+
+@keyframes blob-float-slow {
+    from { --blob-float-slow: 3px; }
+    to { --blob-float-slow: -3px; }
+}
+
+.hero-blob {
+    border-radius: var(--blob-top) calc(100% - var(--blob-top)) var(--blob-bottom) calc(100% - var(--blob-bottom)) /
+        var(--blob-left) var(--blob-right) calc(100% - var(--blob-right)) calc(100% - var(--blob-left));
+    rotate: calc(var(--blob-spin-slow) + var(--blob-spin-fast));
+    translate: 0 calc(var(--blob-float-fast) + var(--blob-float-slow));
+    animation: blob-top 15.5s ease-in-out infinite alternate,
+        blob-bottom 19.4s ease-in-out infinite alternate,
+        blob-left 20.9s ease-in-out infinite alternate,
+        blob-right 24s ease-in-out infinite alternate,
+        blob-spin-slow 43.4s ease-in-out infinite alternate,
+        blob-spin-fast 12.8s ease-in-out infinite alternate,
+        blob-float-fast 7.4s ease-in-out infinite alternate,
+        blob-float-slow 29.1s ease-in-out infinite alternate;
+}
+
+.hero-blob-photo {
+    rotate: calc(-1 * (var(--blob-spin-slow) + var(--blob-spin-fast)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-blob {
+        animation: none;
+    }
+}

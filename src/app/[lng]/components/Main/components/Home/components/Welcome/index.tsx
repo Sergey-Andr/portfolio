@@ -32,11 +32,11 @@ export default async function Welcome({language}: { language: TFunction }) {
                 </nav>
             </div>
             <div className="w-2/5">
-                <div className="rounded-[64%_36%_42%_58%/55%_62%_38%_45%] animate-blob motion-reduce:animate-none overflow-hidden border-2 border-black">
+                <div className="hero-blob overflow-hidden border-2 border-black">
                     <Image
                         src={face as StaticImageData}
                         alt={"face"}
-                        className="w-full scale-105 animate-blob-counter motion-reduce:animate-none"
+                        className="hero-blob-photo w-full scale-105"
                     />
                 </div>
             </div>

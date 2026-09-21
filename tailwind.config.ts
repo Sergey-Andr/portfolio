@@ -19,24 +19,6 @@ const config: any = {
                 quad: "2560px",
             },
             keyframes: {
-                "blob-morph": {
-                    "0%": {borderRadius: "64% 36% 42% 58% / 55% 62% 38% 45%"},
-                    "33%": {borderRadius: "40% 60% 64% 36% / 63% 40% 60% 37%"},
-                    "66%": {borderRadius: "56% 44% 36% 64% / 38% 58% 42% 62%"},
-                    "100%": {borderRadius: "62% 38% 56% 44% / 46% 37% 63% 54%"},
-                },
-                "blob-spin": {
-                    from: {rotate: "-5deg"},
-                    to: {rotate: "5deg"},
-                },
-                "blob-counter-spin": {
-                    from: {rotate: "5deg"},
-                    to: {rotate: "-5deg"},
-                },
-                "blob-float": {
-                    from: {translate: "0 -6px"},
-                    to: {translate: "0 6px"},
-                },
                 "circle-text": {
                     from: {rotate: "0deg"},
                     to: {rotate: "360deg"},
@@ -63,8 +45,6 @@ const config: any = {
                 },
             },
             animation: {
-                blob: "blob-morph 12s cubic-bezier(.37,0,.63,1) infinite alternate, blob-spin 17s ease-in-out infinite alternate, blob-float 7s ease-in-out infinite alternate",
-                "blob-counter": "blob-counter-spin 17s ease-in-out infinite alternate",
                 "circle-text": "circle-text 24s linear infinite",
                 "fade-in": "fade-in 0.3s ease-out forwards",
                 "overlay-in": "overlay-in 0.22s cubic-bezier(.2,.7,.3,1) both",

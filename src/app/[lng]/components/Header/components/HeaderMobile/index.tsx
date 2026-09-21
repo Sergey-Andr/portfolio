@@ -23,8 +23,10 @@ const HeaderMobile = (): ReactElement => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.position = "fixed";
+      document.body.style.width = "100%";
     } else {
       document.body.style.position = "static";
+      document.body.style.width = "";
     }
   }, [isOpen]);
 

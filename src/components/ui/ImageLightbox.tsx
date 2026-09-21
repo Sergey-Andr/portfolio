@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import Image from "next/image";
 import {Dialog as DialogPrimitive} from "radix-ui";
 import {cn} from "@/lib/utils";
@@ -34,15 +34,6 @@ export function ImageLightbox({
     const [index, setIndex] = useState(0);
     const touchStartX = useRef<number | null>(null);
     const hasMany = images.length > 1;
-
-    useEffect(() => {
-        if (open) document.documentElement.style.overflow = "hidden";
-        else document.documentElement.style.overflow = "";
-
-        return () => {
-            document.documentElement.style.overflow = "";
-        };
-    }, [open]);
 
     const show = (next: number) =>
         setIndex((next + images.length) % images.length);

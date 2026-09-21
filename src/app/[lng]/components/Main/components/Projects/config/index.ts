@@ -7,7 +7,7 @@ interface IProjects {
     name: string;
     stack: string[];
     links?: { git: string; demo?: string };
-    photo: StaticImageData;
+    photos: StaticImageData[];
 }
 
 export const projects: IProjects[] = [
@@ -18,7 +18,7 @@ export const projects: IProjects[] = [
             git: "https://github.com/Sergey-Andr/Verso",
             demo: "https://esverso.com",
         },
-        photo: verso as StaticImageData,
+        photos: [verso as StaticImageData],
     },
     {
         name: "watop",
@@ -27,11 +27,11 @@ export const projects: IProjects[] = [
             git: "https://github.com/Sergey-Andr/watop",
             demo: "https://watop.vercel.app/",
         },
-        photo: watop as StaticImageData,
+        photos: [watop as StaticImageData],
     },
     {
         name: "aat",
         stack: ["React", "Material UI"],
-        photo: aat as StaticImageData,
+        photos: [aat as StaticImageData],
     },
 ];

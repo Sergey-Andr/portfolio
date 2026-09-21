@@ -43,12 +43,32 @@ const config: any = {
                 "fade-in": {
                     from: {color: "#fff", marginTop: "10px"},
                     to: {color: "rgba(0,0,0,0.6)", marginTop: "0"}
-                }
+                },
+                "overlay-in": {
+                    from: {opacity: "0"},
+                    to: {opacity: "1"},
+                },
+                "overlay-out": {
+                    from: {opacity: "1"},
+                    to: {opacity: "0"},
+                },
+                "lightbox-in": {
+                    from: {opacity: "0", transform: "translateY(24px) scale(0.98)"},
+                    to: {opacity: "1", transform: "translateY(0) scale(1)"},
+                },
+                "lightbox-out": {
+                    from: {opacity: "1", transform: "translateY(0) scale(1)"},
+                    to: {opacity: "0", transform: "translateY(24px) scale(0.98)"},
+                },
             },
             animation: {
                 blob: "blob 7s linear infinite",
                 "circle-text": "circle-text 24s linear infinite",
                 "fade-in": "fade-in 0.3s ease-out forwards",
+                "overlay-in": "overlay-in 0.22s cubic-bezier(.2,.7,.3,1) both",
+                "overlay-out": "overlay-out 0.22s cubic-bezier(.2,.7,.3,1) both",
+                "lightbox-in": "lightbox-in 0.22s cubic-bezier(.2,.7,.3,1) both",
+                "lightbox-out": "lightbox-out 0.22s cubic-bezier(.2,.7,.3,1) both",
             },
         },
     },

@@ -3,12 +3,15 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
 import Image from "next/image";
-import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
+import {Dialog as DialogPrimitive} from "radix-ui";
 import {cn} from "@/lib/utils";
 import {StaticImageData} from "next/dist/shared/lib/get-img-props";
-import {ChevronLeft, ChevronRight, Maximize2} from "lucide-react";
+import {ChevronLeft, ChevronRight, Maximize2, XIcon} from "lucide-react";
 
 const SWIPE_THRESHOLD = 50;
+
+const arrowClassName =
+    "absolute top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition duration-200 hover:border-sky-400 hover:bg-black/60 focus-visible:border-sky-400 focus-visible:outline-none";
 
 interface ImageLightboxProps {
     images: StaticImageData[];
@@ -49,6 +52,11 @@ export function ImageLightbox({
         setOpen(value);
     };
 
+    const slide = (e: React.MouseEvent, next: number) => {
+        e.stopPropagation();
+        show(next);
+    };
+
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!hasMany) return;
         if (e.key === "ArrowLeft") show(index - 1);
@@ -64,12 +72,13 @@ export function ImageLightbox({
         const delta = e.changedTouches[0].clientX - touchStartX.current;
         touchStartX.current = null;
         if (Math.abs(delta) < SWIPE_THRESHOLD) return;
+        e.preventDefault();
         show(delta < 0 ? index + 1 : index - 1);
     };
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogTrigger asChild>
+        <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+            <DialogPrimitive.Trigger asChild>
                 <button
                     type="button"
                     aria-label={`${labels.open}: ${alt}`}
@@ -90,50 +99,58 @@ export function ImageLightbox({
                         {hasMany ? images.length : null}
                     </span>
                 </button>
-            </DialogTrigger>
-            <DialogContent
-                className="w-fit h-fit p-0 flex items-center"
-                onKeyDown={onKeyDown}
-                onTouchStart={onTouchStart}
-                onTouchEnd={onTouchEnd}
-            >
-                <DialogTitle className="sr-only">{alt}</DialogTitle>
-                <div className="relative w-[80vw] h-[90vh] max-sm:w-[94vw] max-sm:h-[70vh]">
-                    {images.map((image, i) => (
-                        <Image
-                            key={image.src}
-                            src={image}
-                            alt={hasMany ? `${alt} ${i + 1}/${images.length}` : alt}
-                            fill
-                            aria-hidden={i !== index}
-                            className={cn(
-                                "object-contain transition-opacity duration-300",
-                                i === index ? "opacity-100" : "opacity-0 pointer-events-none",
-                            )}
-                            sizes="100vw"
-                        />
-                    ))}
+            </DialogPrimitive.Trigger>
+            <DialogPrimitive.Portal>
+                <DialogPrimitive.Overlay
+                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm data-[state=open]:animate-overlay-in data-[state=closed]:animate-overlay-out motion-reduce:animate-none"
+                />
+                <DialogPrimitive.Content
+                    aria-describedby={undefined}
+                    onClick={() => setOpen(false)}
+                    onKeyDown={onKeyDown}
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
+                    className="fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center outline-none data-[state=open]:animate-lightbox-in data-[state=closed]:animate-lightbox-out motion-reduce:animate-none"
+                >
+                    <DialogPrimitive.Title className="sr-only">{alt}</DialogPrimitive.Title>
+                    <div className="relative w-[80vw] h-[82vh] max-sm:w-[94vw] max-sm:h-[70vh]">
+                        {images.map((image, i) => (
+                            <Image
+                                key={image.src}
+                                src={image}
+                                alt={hasMany ? `${alt} ${i + 1}/${images.length}` : alt}
+                                fill
+                                aria-hidden={i !== index}
+                                className={cn(
+                                    "object-contain transition-opacity duration-300",
+                                    i === index ? "opacity-100" : "opacity-0",
+                                )}
+                                sizes="100vw"
+                            />
+                        ))}
+                    </div>
                     {hasMany && (
                         <>
                             <button
                                 type="button"
                                 aria-label={labels.prev}
-                                onClick={() => show(index - 1)}
-                                className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition duration-200 hover:border-sky-400 hover:bg-black/60 focus-visible:border-sky-400 focus-visible:outline-none"
+                                onClick={(e) => slide(e, index - 1)}
+                                className={cn(arrowClassName, "left-4 cursor-pointer max-sm:left-2")}
                             >
                                 <ChevronLeft className="h-6 w-6"/>
                             </button>
                             <button
                                 type="button"
                                 aria-label={labels.next}
-                                onClick={() => show(index + 1)}
-                                className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition duration-200 hover:border-sky-400 hover:bg-black/60 focus-visible:border-sky-400 focus-visible:outline-none"
+                                onClick={(e) => slide(e, index + 1)}
+                                className={cn(arrowClassName, "right-4 cursor-pointer max-sm:right-2")}
                             >
                                 <ChevronRight className="h-6 w-6"/>
                             </button>
                             <div
                                 aria-live="polite"
-                                className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/40 px-3 py-1.5"
+                                onClick={(e) => e.stopPropagation()}
+                                className="absolute bottom-6 left-1/2 flex -translate-x-1/2 cursor-default items-center gap-2 rounded-full bg-black/40 px-3 py-1.5"
                             >
                                 {images.map((image, i) => (
                                     <button
@@ -141,9 +158,9 @@ export function ImageLightbox({
                                         type="button"
                                         aria-label={`${i + 1}/${images.length}`}
                                         aria-current={i === index}
-                                        onClick={() => show(i)}
+                                        onClick={(e) => slide(e, i)}
                                         className={cn(
-                                            "h-2 rounded-full transition-all duration-200",
+                                            "h-2 cursor-pointer rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
                                             i === index ? "w-5 bg-sky-400" : "w-2 bg-white/50 hover:bg-white/80",
                                         )}
                                     />
@@ -151,8 +168,14 @@ export function ImageLightbox({
                             </div>
                         </>
                     )}
-                </div>
-            </DialogContent>
-        </Dialog>
+                    <DialogPrimitive.Close
+                        className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white/80 transition duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    >
+                        <XIcon className="h-6 w-6"/>
+                        <span className="sr-only">Close</span>
+                    </DialogPrimitive.Close>
+                </DialogPrimitive.Content>
+            </DialogPrimitive.Portal>
+        </DialogPrimitive.Root>
     );
 }

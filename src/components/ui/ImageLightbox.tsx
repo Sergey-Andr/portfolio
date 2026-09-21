@@ -6,7 +6,7 @@ import Image from "next/image";
 import {Dialog as DialogPrimitive} from "radix-ui";
 import {cn} from "@/lib/utils";
 import {StaticImageData} from "next/dist/shared/lib/get-img-props";
-import {ChevronLeft, ChevronRight, Maximize2, Play, XIcon} from "lucide-react";
+import {ChevronLeft, ChevronRight, Maximize2, Pause, Play, XIcon} from "lucide-react";
 
 const SWIPE_THRESHOLD = 50;
 
@@ -21,17 +21,81 @@ interface ImageLightboxProps {
     cover: StaticImageData;
     media?: ProjectMedia[];
     alt: string;
-    labels: { open: string; prev: string; next: string };
+    labels: { open: string; prev: string; next: string; play: string; pause: string; seek: string };
     width?: number;
     height?: number;
     className?: string;
 }
 
-function Slide({item, alt, active}: { item: ProjectMedia; alt: string; active: boolean }) {
-    const videoRef = useRef<HTMLVideoElement>(null);
+const formatTime = (seconds: number) => {
+    const total = Math.floor(Number.isFinite(seconds) ? seconds : 0);
+    return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+};
+
+function VideoControls({video, labels}: { video: HTMLVideoElement; labels: ImageLightboxProps["labels"] }) {
+    const [playing, setPlaying] = useState(!video.paused);
+    const [time, setTime] = useState(video.currentTime);
+    const [duration, setDuration] = useState(video.duration);
+
+    useEffect(() => {
+        const sync = () => {
+            setPlaying(!video.paused);
+            setTime(video.currentTime);
+            setDuration(video.duration);
+        };
+        const events = ["play", "pause", "timeupdate", "loadedmetadata", "durationchange", "seeked"];
+        events.forEach((name) => video.addEventListener(name, sync));
+        sync();
+        return () => events.forEach((name) => video.removeEventListener(name, sync));
+    }, [video]);
+
+    const stop = (e: React.SyntheticEvent) => e.stopPropagation();
+
+    return (
+        <div
+            onClick={stop}
+            onTouchStart={stop}
+            onTouchEnd={stop}
+            className="absolute bottom-16 left-1/2 flex w-[min(640px,86vw)] -translate-x-1/2 cursor-default items-center gap-3 rounded-full bg-black/50 px-3 py-2 text-xs tabular-nums text-white"
+        >
+            <button
+                type="button"
+                aria-label={playing ? labels.pause : labels.play}
+                onClick={() => (video.paused ? video.play().catch(() => undefined) : video.pause())}
+                className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full transition duration-200 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            >
+                {playing ? <Pause className="h-4 w-4 fill-current"/> : <Play className="h-4 w-4 fill-current"/>}
+            </button>
+            <span>{formatTime(time)}</span>
+            <input
+                type="range"
+                aria-label={labels.seek}
+                min={0}
+                max={Number.isFinite(duration) ? duration : 0}
+                step={0.1}
+                value={time}
+                onChange={(e) => {
+                    video.currentTime = Number(e.target.value);
+                    setTime(video.currentTime);
+                }}
+                className="h-1 flex-1 cursor-pointer rounded-full accent-sky-400 outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            />
+            <span>{formatTime(duration)}</span>
+        </div>
+    );
+}
+
+function Slide({item, alt, active, onActive}: {
+    item: ProjectMedia;
+    alt: string;
+    active: boolean;
+    onActive: (video: HTMLVideoElement | null) => void;
+}) {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
         const video = videoRef.current;
+        if (active) onActive(video);
         if (!video) return;
         if (!active) {
             video.pause();
@@ -40,7 +104,7 @@ function Slide({item, alt, active}: { item: ProjectMedia; alt: string; active: b
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         video.currentTime = 0;
         video.play().catch(() => undefined);
-    }, [active]);
+    }, [active, onActive]);
 
     const className = cn(
         "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
@@ -88,9 +152,14 @@ export function ImageLightbox({
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(0);
     const touchStartX = useRef<number | null>(null);
+    const [activeVideo, setActiveVideo] = useState<HTMLVideoElement | null>(null);
     const slides: ProjectMedia[] = media ?? [{type: "image", src: cover}];
     const hasMany = slides.length > 1;
     const hasVideo = slides.some((item) => item.type === "video");
+
+    useEffect(() => {
+        if (!open) setActiveVideo(null);
+    }, [open]);
 
     const show = (next: number) =>
         setIndex((next + slides.length) % slides.length);
@@ -106,6 +175,14 @@ export function ImageLightbox({
     };
 
     const onKeyDown = (e: React.KeyboardEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.tagName === "INPUT") return;
+        if (e.key === " " && activeVideo && target.tagName !== "BUTTON") {
+            e.preventDefault();
+            if (activeVideo.paused) activeVideo.play().catch(() => undefined);
+            else activeVideo.pause();
+            return;
+        }
         if (!hasMany) return;
         if (e.key === "ArrowLeft") show(index - 1);
         if (e.key === "ArrowRight") show(index + 1);
@@ -169,9 +246,11 @@ export function ImageLightbox({
                                 item={item}
                                 alt={hasMany ? `${alt} ${i + 1}/${slides.length}` : alt}
                                 active={i === index}
+                                onActive={setActiveVideo}
                             />
                         ))}
                     </div>
+                    {activeVideo && <VideoControls video={activeVideo} labels={labels}/>}
                     {hasMany && (
                         <>
                             <button

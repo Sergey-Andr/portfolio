@@ -12,6 +12,9 @@ export default async function Projects({language}: { language: TFunction }) {
         open: language("main.projects.openPhoto"),
         prev: language("main.projects.prevPhoto"),
         next: language("main.projects.nextPhoto"),
+        play: language("main.projects.playVideo"),
+        pause: language("main.projects.pauseVideo"),
+        seek: language("main.projects.seekVideo"),
     };
 
     return (

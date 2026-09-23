@@ -8,7 +8,7 @@ import {TFunction} from "@/app/i18n";
 
 export default async function Footer({language}: { language: TFunction }) {
     return (
-        <footer id="contacts" className="mb-16 quad:mb-32">
+        <footer id="contacts" data-screen-block className="mb-16 quad:mb-32">
             <h2 className="text-2xl quad:text-4xl max-lg:text-lg xl:mb-2 uppercase text-sky-400 font-medium">
                 {language("footer.title")}
             </h2>

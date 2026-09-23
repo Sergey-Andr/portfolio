@@ -66,7 +66,7 @@ const Articles = () => {
     };
 
     return (
-        <section id="articles" className="mb-96 max-lg:mb-72 max-sm:mb-32 flex flex-col scroll-m-16">
+        <section id="articles" data-screen-block className="mb-96 max-lg:mb-72 max-sm:mb-32 flex flex-col scroll-m-16">
             <div className="mb-4">
                 <h2
                     id="about"

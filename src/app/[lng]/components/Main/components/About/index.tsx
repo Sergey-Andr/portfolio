@@ -7,7 +7,7 @@ import {TFunction} from "@/app/i18n";
 
 export default async function About({language}: { language: TFunction }) {
     return (
-        <section className="mb-96 max-lg:mb-72 max-sm:mb-32 flex max-md:flex-col">
+        <section data-screen-block className="mb-96 max-lg:mb-72 max-sm:mb-32 flex max-md:flex-col">
             <aside className="relative w-fit h-fit mr-16 max-lg:mr-8 max-md:mb-8">
                 <Image
                     src={laptop as StaticImageData}

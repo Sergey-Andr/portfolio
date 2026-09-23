@@ -4,7 +4,19 @@ import {projects} from "./config";
 import {TFunction} from "@/app/i18n";
 import {ImageLightbox} from "@/components/ui/ImageLightbox";
 
+const linkClassName =
+    "flex items-center gap-2 rounded-full border border-black/10 px-4 py-1.5 font-medium transition duration-200 hover:border-sky-400 hover:text-sky-500 focus-visible:border-sky-400 focus-visible:outline-none quad:text-xl max-lg:text-sm";
+
 export default async function Projects({language}: { language: TFunction }) {
+    const lightboxLabels = {
+        open: language("main.projects.openPhoto"),
+        prev: language("main.projects.prevPhoto"),
+        next: language("main.projects.nextPhoto"),
+        play: language("main.projects.playVideo"),
+        pause: language("main.projects.pauseVideo"),
+        seek: language("main.projects.seekVideo"),
+    };
+
     return (
         <section className="mb-96 max-lg:mb-72 max-sm:mb-32">
             <h2
@@ -20,13 +32,15 @@ export default async function Projects({language}: { language: TFunction }) {
                 {projects.map((project, index) => (
                     <li
                         key={project.name}
-                        className={`flex justify-between max-md:flex-col max-md:items-center mb-32 quad:mb-64 max-lg:mb-16 last:mb-0 ${index % 2 !== 0 ? "flex-row-reverse" : ""}`}
+                        className={`flex justify-between max-md:flex-col items-center mb-32 quad:mb-64 max-lg:mb-16 last:mb-0 ${index % 2 !== 0 ? "flex-row-reverse" : ""}`}
                     >
-                        <aside className="max-sm:mb-4">
+                        <aside className="w-[32rem] shrink-0 quad:w-[42rem] max-lg:w-96 max-sm:w-full max-sm:mb-4">
                             <ImageLightbox
-                                src={project.photo}
-                                alt={language(`main.${project.name}.title`)}
-                                className="min-w-96 max-w-lg max-h-64 quad:max-w-2xl max-lg:w-96 max-sm:w-full rounded-xl object-cover object-contain"
+                                cover={project.cover}
+                                media={project.media}
+                                alt={language(`main.projects.${project.name}.title`)}
+                                labels={lightboxLabels}
+                                className="aspect-[2/1] w-full h-auto object-cover object-top"
                             />
                         </aside>
                         <div className="w-full flex items-center justify-center">
@@ -40,46 +54,38 @@ export default async function Projects({language}: { language: TFunction }) {
                                     }}
                                     className="text-center text-black/60 quad:text-xl quad:tracking-wide max-lg:text-sm mb-4"
                                 ></p>
-                                <strong className="mb-4">
+                                <ul className="flex flex-wrap justify-center gap-2 mb-4">
                                     {project.stack.map((tech) => (
-                                        <span
+                                        <li
                                             key={`${project.name}_${tech}`}
-                                            className="mr-4 last:mr-0 quad:text-xl max-lg:text-sm"
+                                            className="rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-sm font-medium quad:text-xl max-lg:text-xs"
                                         >
-                      {tech}
-                    </span>
+                                            {tech}
+                                        </li>
                                     ))}
-                                </strong>
+                                </ul>
                                 {project.links ? (
-                                    <nav className="flex">
+                                    <nav className="flex flex-wrap justify-center gap-3">
                                         <Link
                                             href={project.links.git}
                                             target="_blank"
-                                            className="flex items-center mr-4 hover:text-black/60 duration-300"
+                                            className={linkClassName}
                                         >
-                                            <p className="mr-2 font-medium quad:text-xl max-lg:text-sm">
-                                                {language(`main.projects.code`)}
-                                            </p>
+                                            {language(`main.projects.code`)}
                                             <FaGithub className="quad:text-xl"/>
                                         </Link>
                                         {project.links.demo ? (
                                             <Link
                                                 href={project.links.demo}
                                                 target="_blank"
-                                                className="flex items-center hover:text-black/60 duration-300"
+                                                className={linkClassName}
                                             >
-                                                <p className="mr-2 font-medium quad:text-xl max-lg:text-sm">
-                                                    {language(`main.projects.demo`)}
-                                                </p>
+                                                {language(`main.projects.demo`)}
                                                 <FaLink className="quad:text-xl"/>
                                             </Link>
-                                        ) : (
-                                            <></>
-                                        )}
+                                        ) : null}
                                     </nav>
-                                ) : (
-                                    <></>
-                                )}
+                                ) : null}
                             </div>
                         </div>
                     </li>

@@ -5,6 +5,7 @@ import {StaticImageData, StaticImport,} from "next/dist/shared/lib/get-img-props
 import Link from "next/link";
 import {FaGithub} from "react-icons/fa6";
 import {TFunction} from "@/app/i18n";
+import HeroBlob from "./components/HeroBlob";
 
 export default async function Welcome({language}: { language: TFunction }) {
     return (
@@ -32,11 +33,13 @@ export default async function Welcome({language}: { language: TFunction }) {
                 </nav>
             </div>
             <div className="w-2/5">
-                <Image
-                    src={face as StaticImageData}
-                    alt={"face"}
-                    className="animate-blob border-2 border-black"
-                />
+                <HeroBlob>
+                    <Image
+                        src={face as StaticImageData}
+                        alt={"face"}
+                        className="hero-blob-photo w-full scale-105"
+                    />
+                </HeroBlob>
             </div>
         </div>
     );

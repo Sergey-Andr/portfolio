@@ -31,8 +31,10 @@ export default function RootLayout({
             <link href={`/logo.webp`} rel="icon" type="image/svg+xml"/>
             <title>Portfolio</title>
         </head>
-        <body className="w-4/5 max-sm:w-11/12 m-auto min-h-dvh h-full bg-white font-sans">
-        {children}
+        <body className="min-h-dvh h-full bg-white font-sans">
+        <div className="w-4/5 max-sm:w-11/12 m-auto min-h-dvh h-full">
+            {children}
+        </div>
         </body>
         </html>
     );

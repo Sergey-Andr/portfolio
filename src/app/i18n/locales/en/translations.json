@@ -26,6 +26,12 @@
       "subTitle": "Each project is a unique piece of development",
       "code": "Code",
       "demo": "Live Demo",
+      "openPhoto": "Open photo",
+      "prevPhoto": "Previous photo",
+      "nextPhoto": "Next photo",
+      "playVideo": "Play video",
+      "pauseVideo": "Pause video",
+      "seekVideo": "Video position",
       "watop": {
         "title": "WATOP",
         "text": "<strong>WATOP is an e-commerce</strong> product for selling confectionery. The main focus is on <strong>SEO optimization</strong>, usability, and security, ensured through the implementation of <strong>JWT authentication</strong> and the creation of high-quality <strong>UI/UX</strong>."

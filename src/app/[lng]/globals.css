@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html:has(body[data-scroll-locked]) {
+    overflow: hidden;
+}
+
+
+@property --blob-top {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 64%;
+}
+
+@property --blob-bottom {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 42%;
+}
+
+@property --blob-left {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 55%;
+}
+
+@property --blob-right {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 62%;
+}
+
+@property --blob-spin {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --blob-float {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+.hero-blob {
+    border-radius: var(--blob-top) calc(100% - var(--blob-top)) var(--blob-bottom) calc(100% - var(--blob-bottom)) /
+        var(--blob-left) var(--blob-right) calc(100% - var(--blob-right)) calc(100% - var(--blob-left));
+    rotate: var(--blob-spin);
+    translate: 0 var(--blob-float);
+}
+
+.hero-blob-photo {
+    rotate: calc(-1 * var(--blob-spin));
+}

@@ -1,6 +1,7 @@
 import Main from "@/app/[lng]/components/Main";
 import Header from "@/app/[lng]/components/Header";
 import Footer from "@/app/[lng]/components/Footer";
+import ScreenBlocks from "@/app/[lng]/components/ScreenBlocks";
 import { useTranslation } from "@/app/i18n";
 
 export default async function Page({
@@ -14,6 +15,7 @@ export default async function Page({
       <Header language={t} />
       <Main language={t} />
       <Footer language={t} />
+      <ScreenBlocks />
     </>
   );
 }

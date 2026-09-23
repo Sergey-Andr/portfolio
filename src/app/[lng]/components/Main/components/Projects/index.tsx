@@ -18,7 +18,7 @@ export default async function Projects({language}: { language: TFunction }) {
     };
 
     return (
-        <section className="mb-96 max-lg:mb-72 max-sm:mb-32">
+        <section data-screen-block className="mb-96 max-lg:mb-72 max-sm:mb-32">
             <h2
                 id="projects"
                 className="text-2xl quad:text-4xl max-lg:text-lg uppercase text-sky-400 xl:mb-2 font-medium scroll-m-16"

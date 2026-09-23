@@ -10,6 +10,11 @@ const lng = {
   ru: ["Главная", "Обо мне", "Проекты", "Контакты"],
 };
 
+const lockBody = (locked: boolean) => {
+  document.body.style.position = locked ? "fixed" : "static";
+  document.body.style.width = locked ? "100%" : "";
+};
+
 const HeaderMobile = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -21,14 +26,13 @@ const HeaderMobile = (): ReactElement => {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-    } else {
-      document.body.style.position = "static";
-      document.body.style.width = "";
-    }
+    lockBody(isOpen);
   }, [isOpen]);
+
+  const closeFromLink = () => {
+    lockBody(false);
+    setIsOpen(false);
+  };
 
   const handleTouchStart = (e: any) => {
     setStartX(e.touches[0].clientX);
@@ -86,9 +90,7 @@ const HeaderMobile = (): ReactElement => {
         <nav>
           <a
             href="#"
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            onClick={closeFromLink}
             className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
           >
             <FaHouse className="mr-4" />
@@ -96,9 +98,7 @@ const HeaderMobile = (): ReactElement => {
           </a>
           <a
             href="#about"
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            onClick={closeFromLink}
             className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
           >
             <FaUser className="mr-4" />
@@ -106,9 +106,7 @@ const HeaderMobile = (): ReactElement => {
           </a>
           <a
             href="#projects"
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            onClick={closeFromLink}
             className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
           >
             <SiCurseforge className="mr-4" />
@@ -116,9 +114,7 @@ const HeaderMobile = (): ReactElement => {
           </a>
           <a
             href="#contacts"
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            onClick={closeFromLink}
             className="text-xl w-full hover:text-black/60 duration-300 flex items-center"
           >
             <FaPhone className="mr-4" />

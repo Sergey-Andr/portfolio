@@ -33,7 +33,7 @@ export async function useTranslation(
       lng,
       Array.isArray(ns) ? ns[0] : ns,
       (options as any).keyPrefix,
-    ),
+    ) as TFunction,
     i18n: i18nextInstance,
   };
 }

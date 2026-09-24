@@ -1,8 +1,8 @@
 import {NextRequest, NextResponse} from "next/server";
 import acceptLanguage from "accept-language";
-import {cookieName, fallbackLng, languages} from "@/app/i18n/settings";
+import {cookieName, fallbackLng, languages, languageToLocale, localeToLanguage} from "@/app/i18n/settings";
 
-acceptLanguage.languages(languages);
+acceptLanguage.languages(languages.map(languageToLocale));
 
 export const config = {
     matcher: [
@@ -10,30 +10,31 @@ export const config = {
     ],
 };
 
-export function middleware(req: NextRequest) {
-    let lng;
-    if (req.cookies.has(cookieName))
-        lng = acceptLanguage.get(req.cookies.get(cookieName as any)?.value);
-    if (!lng) lng = acceptLanguage.get(req.headers.get("Accept-Language"));
-    if (!lng) lng = fallbackLng;
+const detectLanguage = (req: NextRequest) => {
+    const fromCookie = req.cookies.get(cookieName)?.value;
+    if (fromCookie && languages.includes(fromCookie)) return fromCookie;
+    const fromHeader = acceptLanguage.get(req.headers.get("Accept-Language"));
+    return fromHeader ? localeToLanguage(fromHeader) : fallbackLng;
+};
 
+export function middleware(req: NextRequest) {
     if (
         !languages.some((loc) => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
         !req.nextUrl.pathname.startsWith("/_next")
     ) {
         return NextResponse.redirect(
-            new URL(`/${lng}${req.nextUrl.pathname}`, req.url),
+            new URL(`/${detectLanguage(req)}${req.nextUrl.pathname}`, req.url),
         );
     }
 
-    if (req.headers.has("referer")) {
-        const refererUrl = new URL(req.headers.get("referer"));
+    const referer = req.headers.get("referer");
+    if (referer) {
+        const refererUrl = new URL(referer);
         const lngInReferer = languages.find((l) =>
             refererUrl.pathname.startsWith(`/${l}`),
         );
         const response = NextResponse.next();
-        if (lngInReferer)
-            response.cookies.set(cookieName as any, lngInReferer as any);
+        if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
         return response;
     }
 

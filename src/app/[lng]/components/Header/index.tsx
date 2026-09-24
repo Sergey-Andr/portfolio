@@ -57,7 +57,17 @@ export default function Header({language}: { language: TFunction }) {
                     <ChangeLanguage/>
                 </div>
             </header>
-            <HeaderMobile/>
+            <HeaderMobile
+                labels={{
+                    home: language("header.home"),
+                    about: language("header.about"),
+                    projects: language("header.projects"),
+                    articles: language("header.articles"),
+                    contacts: language("header.contacts"),
+                    openMenu: language("header.openMenu"),
+                    closeMenu: language("header.closeMenu"),
+                }}
+            />
         </>
     );
 }

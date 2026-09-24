@@ -1,33 +1,39 @@
 "use client";
 import { memo, ReactElement, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { FaAngleRight, FaHouse, FaPhone, FaUser } from "react-icons/fa6";
+import { FaAngleRight, FaHouse, FaNewspaper, FaPhone, FaUser } from "react-icons/fa6";
 import { SiCurseforge } from "react-icons/si";
+import ChangeLanguage from "@/app/[lng]/components/Header/components/ChangeLanguage";
 
-const lng = {
-  en: ["Home", "About", "Projects", "Contacts"],
-  ua: ["Головна", "Про мене", "Проекти", "Контакти"],
-  ru: ["Главная", "Обо мне", "Проекты", "Контакты"],
-};
+interface HeaderMobileLabels {
+  home: string;
+  about: string;
+  projects: string;
+  articles: string;
+  contacts: string;
+  openMenu: string;
+  closeMenu: string;
+}
 
 const lockBody = (locked: boolean) => {
   document.body.style.position = locked ? "fixed" : "static";
   document.body.style.width = locked ? "100%" : "";
 };
 
-const HeaderMobile = (): ReactElement => {
+const linkClassName =
+  "text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center";
+
+const HeaderMobile = ({ labels }: { labels: HeaderMobileLabels }): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [language, setLanguage] = useState([]);
-  const route = usePathname();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setLanguage(lng[route.slice(1)]);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
-    lockBody(isOpen);
-  }, [isOpen]);
+    if (mounted) lockBody(isOpen);
+  }, [isOpen, mounted]);
 
   const closeFromLink = () => {
     lockBody(false);
@@ -53,22 +59,34 @@ const HeaderMobile = (): ReactElement => {
     setStartX(0);
   };
 
-  if (language.length === 0) {
+  if (!mounted) {
     return <></>;
   }
 
   const height = document.body.scrollHeight;
+  const links = [
+    { href: "#", label: labels.home, Icon: FaHouse },
+    { href: "#about", label: labels.about, Icon: FaUser },
+    { href: "#projects", label: labels.projects, Icon: SiCurseforge },
+    { href: "#articles", label: labels.articles, Icon: FaNewspaper },
+    { href: "#contacts", label: labels.contacts, Icon: FaPhone },
+  ];
+
   return (
     <header className="sm:hidden">
-      <span
+      <button
+        type="button"
+        aria-label={labels.openMenu}
+        aria-expanded={isOpen}
         onClick={() => {
           setIsOpen(true);
         }}
-        className="absolute top-0 left-0 bg-sky-400/60 w-8 h-8 rounded-full -translate-x-1/2"
+        className="absolute z-40 top-0 left-0 bg-sky-400/60 w-8 h-8 rounded-full -translate-x-1/2"
       >
-        <FaAngleRight className="fill-black relative translate-x-full translate-y-1/2" />
-      </span>
+        <FaAngleRight className="fill-black relative translate-x-full" />
+      </button>
       <span
+        aria-label={labels.closeMenu}
         onClick={() => {
           setIsOpen(false);
         }}
@@ -88,39 +106,16 @@ const HeaderMobile = (): ReactElement => {
       >
         <h2 className="text-2xl font-bold mb-8">Serhii.dev</h2>
         <nav>
-          <a
-            href="#"
-            onClick={closeFromLink}
-            className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
-          >
-            <FaHouse className="mr-4" />
-            {language[0]}
-          </a>
-          <a
-            href="#about"
-            onClick={closeFromLink}
-            className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
-          >
-            <FaUser className="mr-4" />
-            {language[1]}
-          </a>
-          <a
-            href="#projects"
-            onClick={closeFromLink}
-            className="mr-4 text-xl w-full mb-4 hover:text-black/60 duration-300 flex items-center"
-          >
-            <SiCurseforge className="mr-4" />
-            {language[2]}
-          </a>
-          <a
-            href="#contacts"
-            onClick={closeFromLink}
-            className="text-xl w-full hover:text-black/60 duration-300 flex items-center"
-          >
-            <FaPhone className="mr-4" />
-            {language[3]}
-          </a>
+          {links.map(({ href, label, Icon }) => (
+            <a key={href} href={href} onClick={closeFromLink} className={linkClassName}>
+              <Icon className="mr-4" />
+              {label}
+            </a>
+          ))}
         </nav>
+        <div className="mt-4">
+          <ChangeLanguage />
+        </div>
       </aside>
       <div
         style={{

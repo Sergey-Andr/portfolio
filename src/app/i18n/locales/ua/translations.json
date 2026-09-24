@@ -44,7 +44,7 @@
       },
       "verso": {
         "title": "Verso",
-        "text": "<strong>Verso</strong> — платформа аналітики погоди з даними в реальному часі та адаптивним UI під різні типи пристроїв. Реалізовано <strong>кастомний рушій скролу</strong>, <strong>Canvas 2D particle renderer</strong> для візуалізації опадів і <strong>дворівневий кеш</strong> для мінімізації зовнішніх API-запитів. Production: <strong>Lighthouse 96, LCP 1s, CLS 0, TBT 0.</strong>"
+        "text": "<strong>Verso</strong> — платформа аналітики погоди з даними в реальному часі та адаптивним UI під різні типи пристроїв. Реалізовано <strong>кастомний рушій скролу</strong>, <strong>Canvas 2D particle renderer</strong> для візуалізації опадів і <strong>дворівневий кеш</strong> для мінімізації зовнішніх API-запитів. Production: <strong>Lighthouse 96, LCP 0.7s, CLS 0, TBT 0.</strong>"
       }
     }
   },

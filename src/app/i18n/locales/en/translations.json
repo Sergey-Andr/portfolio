@@ -1,19 +1,21 @@
 {
+  "meta": {
+    "title": "Serhii Andriievskyi — Front-end Engineer",
+    "description": "Portfolio of Serhii Andriievskyi, a front-end engineer working with React, Next.js and TypeScript: projects, articles and contacts."
+  },
   "header": {
     "home": "Home",
     "about": "About",
     "projects": "Projects",
     "contacts": "Contacts",
     "articles": "Articles",
-    "en": "English",
-    "ua": "Ukrainian",
-    "ru": "Russian",
-    "language": "En"
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "main": {
     "home": {
       "title": "Front-end Engineer",
-      "subTitle": "Hi! I'm Serhii Andriievskiy. A passionate Front-end Engineer",
+      "subTitle": "Hi! I'm Serhii Andriievskyi, a passionate Front-end Engineer",
       "stack": "Tech Stack"
     },
     "about": {
@@ -23,7 +25,7 @@
     },
     "projects": {
       "title": "projects",
-      "subTitle": "Each project is a unique piece of development",
+      "subTitle": "Each project is a unique piece of engineering",
       "code": "Code",
       "demo": "Live Demo",
       "openPhoto": "Open photo",
@@ -48,7 +50,9 @@
   },
   "articles": {
     "title": "Articles",
-    "subTitle": "Here you can see the train of my thoughts",
+    "scrollLeft": "Scroll articles left",
+    "scrollRight": "Scroll articles right",
+    "subTitle": "Here you can follow my train of thought",
     "articles": {
       "codeQuality": {
         "title": "Code Quality",
@@ -60,7 +64,7 @@
       },
       "restParadox": {
         "title": "The Rest Paradox",
-        "text": "In the modern world, more and more people are resting — and <strong>burning out more than ever</strong>. I've collected a couple of my own techniques here that help me stay effective.\n\nThe most important thing to understand: <strong>peak productivity for complex tasks is the first 4 hours</strong>. Biologically, I can work up to 6, but even that still doesn't match a standard workday. After that, efficiency inevitably drops. The key is not to try to squeeze out extra strength for one last push, because you're <strong>borrowing energy from the next day</strong>. This leads to <strong>brain fog, laziness</strong>, and thoughts of doing something else.\n\nThe second point is \"rest\": <strong>video games, YouTube videos, TikTok</strong>, etc. At the brain level, this is <strong>the same kind of work</strong>. The brain uses the same regions that are active during actual work — you're just switching from one task to another, more entertaining one. This is where many people fall into a loop: they get tired → go play → <strong>don't restore energy</strong> → the brain screams that it's tired again.\n\n(A short aside: the brain has two phases. <strong>TPN</strong> — a phase of active work that suppresses other processes. And <strong>DMN</strong> — which is responsible for rest and processing. Each phase suppresses the other, and it's crucial to manage them correctly.)\n\n<strong>True recovery happens only when we \"do nothing.\"</strong> This is when the DMN turns on. Only in this mode does the brain transfer information from the <strong>hippocampus</strong> to the <strong>cortex</strong> and \"clean up\" neurons. The most important time is <strong>the first 20 minutes</strong> after intense cognitive work.\n\nThe key thing is that you don't feel boredom. The biological nature of boredom is a signal of information deprivation. But if you've just finished a complex task, your brain is loaded with data. While you sit still, the DMN is actively working, <strong>\"digesting\" this mass of information</strong>. Boredom simply doesn't have time to kick in.\n\nSports are also one of the strongest tools against fatigue. Physical activity forcibly knocks the nervous system out of the TPN phase: blood flows away from the prefrontal cortex, and the brain switches modes. During intense muscle activity, muscles produce <strong>lactate — a super fuel</strong> that is far more energy-efficient for the brain than glucose — so the brain recovers much more effectively after training."
+        "text": "In the modern world, more and more people are resting — and <strong>burning out more than ever</strong>. I've collected a couple of my own techniques here that help me stay effective.\n\nThe most important thing to understand: <strong>peak productivity for complex tasks is the first 4 hours</strong>. Biologically, I can work up to 6, but even that still doesn't match a standard workday. After that, efficiency inevitably drops. The key is not to try to squeeze out extra strength for one last push, because you're <strong>borrowing energy from the next day</strong>. This leads to <strong>brain fog, laziness</strong>, and thoughts of doing something else.\n\nThe second point is \"rest\": <strong>video games, YouTube videos, TikTok</strong>, etc. At the brain level, this is <strong>the same kind of work</strong>. The brain uses the same regions that are active during actual work — you're just switching from one task to another, more entertaining one. This is where many people fall into a loop: they get tired → go play → <strong>don't restore energy</strong> → the brain screams that it's tired again.\n\n(A short aside: the brain has two phases. <strong>TPN</strong> — a phase of active work that suppresses other processes. And <strong>DMN</strong> — which is responsible for rest and processing. Each phase suppresses the other, and it's crucial to manage them correctly.)\n\n<strong>True recovery happens only when we \"do nothing.\"</strong> This is when the DMN turns on. In this mode (and even more so during sleep) the brain transfers information from the <strong>hippocampus</strong> to the <strong>cortex</strong> and \"clean up\" neurons. The most important time is <strong>the first 20 minutes</strong> after intense cognitive work.\n\nThe key thing is that you don't feel boredom. The biological nature of boredom is a signal of information deprivation. But if you've just finished a complex task, your brain is loaded with data. While you sit still, the DMN is actively working, <strong>\"digesting\" this mass of information</strong>. Boredom simply doesn't have time to kick in.\n\nSports are also one of the strongest tools against fatigue. Physical activity forcibly knocks the nervous system out of the TPN phase: blood flows away from the prefrontal cortex, and the brain switches modes. During intense muscle activity, muscles produce <strong>lactate</strong>, which the brain can burn as fuel alongside glucose — one more reason it recovers better after training."
       },
       "readingDocumentation": {
         "title": "Reading Documentation",
@@ -68,7 +72,7 @@
       },
       "AIStandard": {
         "title": "The Illusion of Standard AI",
-        "text": "I used to think ChatGPT and Gemini were getting \"dumber.\" The answers felt generic, safe, and often missed the point. I realized the problem wasn't the model itself, but how it's packaged for the mass market.\n\nStandard models are heavily restricted. Companies optimize them to be \"helpful assistants\" that prioritize user satisfaction over raw truth. This leads to <strong>smoothed corners and generic advice</strong> — the model gives you the answer you *want*, not the one you *need*.\n\nTo unlock real potential, I started writing custom instructions. It’s not just prompting; it’s engineering the model's behavior.\n\n<strong>What I learned:</strong><ul><li><strong>Mixture of Experts:</strong> Models aren't one giant brain. They are clusters of \"experts.\" Standard prompts often activate generic pathways. Specific instructions force the model to route the query to the right \"expert,\" bypassing the noise.</li><li><strong>Fighting Generalization:</strong> Without strict context, models drift. I learned to define the role, tone, and constraints explicitly to prevent the AI from defaulting to \"average.\"</li></ul>But the most critical lesson was understanding <strong>limitations</strong>.\nModels don't just \"know\" things; they predict. If a task is too complex, they might <strong>hallucinate</strong> or invent non-existent libraries just to satisfy the instruction. I learned to anticipate this: I break down complex tasks and explicitly forbid shortcuts in my prompts.\n\nAI is a powerful tool, but only if you know how to drive it. Otherwise, you're just a passenger in a self-driving car going the wrong way."
+        "text": "I used to think ChatGPT and Gemini were getting \"dumber.\" The answers felt generic, safe, and often missed the point. I realized the problem wasn't the model itself, but how it's packaged for the mass market.\n\nStandard models are heavily restricted. Companies optimize them to be \"helpful assistants\" that prioritize user satisfaction over raw truth. This leads to <strong>smoothed corners and generic advice</strong> — the model gives you the answer you <em>want</em>, not the one you <em>need</em>.\n\nTo unlock real potential, I started writing custom instructions. It’s not just prompting; it’s engineering the model's behavior.\n\n<strong>What I learned:</strong><ul><li><strong>Mixture of Experts:</strong> Many modern models aren't one giant brain: inside, a router sends each token to a few specialised sub-networks (\"experts\"). A prompt can't pick an expert — routing happens token by token, not by topic. What specific instructions do change is the context the model predicts from, and that is what cuts out the noise.</li><li><strong>Fighting Generalization:</strong> Without strict context, models drift. I learned to define the role, tone, and constraints explicitly to prevent the AI from defaulting to \"average.\"</li></ul>But the most critical lesson was understanding <strong>limitations</strong>.\nModels don't just \"know\" things; they predict. If a task is too complex, they might <strong>hallucinate</strong> or invent non-existent libraries just to satisfy the instruction. I learned to anticipate this: I break down complex tasks and explicitly forbid shortcuts in my prompts.\n\nAI is a powerful tool, but only if you know how to drive it. Otherwise, you're just a passenger in a self-driving car going the wrong way."
       }
     }
   },

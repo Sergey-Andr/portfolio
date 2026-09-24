@@ -10,7 +10,7 @@ import {ProjectMedia} from "@/components/ui/ImageLightbox";
 interface IProjects {
     name: string;
     stack: string[];
-    links?: { git: string; demo?: string };
+    links?: { git?: string; demo?: string };
     cover: StaticImageData;
     media?: ProjectMedia[];
 }
@@ -18,9 +18,8 @@ interface IProjects {
 export const projects: IProjects[] = [
     {
         name: "verso",
-        stack: ["Next.js", "Tailwind CSS"],
+        stack: ["Next.js", "TypeScript", "Tailwind CSS"],
         links: {
-            git: "https://github.com/Sergey-Andr/Verso",
             demo: "https://esverso.com",
         },
         cover: verso as StaticImageData,
@@ -37,7 +36,7 @@ export const projects: IProjects[] = [
     },
     {
         name: "watop",
-        stack: ["Next.js", "Tailwind CSS"],
+        stack: ["Next.js", "TypeScript", "Tailwind CSS"],
         links: {
             git: "https://github.com/Sergey-Andr/watop",
             demo: "https://watop.vercel.app/",

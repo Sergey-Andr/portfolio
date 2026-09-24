@@ -66,14 +66,16 @@ export default async function Projects({language}: { language: TFunction }) {
                                 </ul>
                                 {project.links ? (
                                     <nav className="flex flex-wrap justify-center gap-3">
-                                        <Link
-                                            href={project.links.git}
-                                            target="_blank"
-                                            className={linkClassName}
-                                        >
-                                            {language(`main.projects.code`)}
-                                            <FaGithub className="quad:text-xl"/>
-                                        </Link>
+                                        {project.links.git ? (
+                                            <Link
+                                                href={project.links.git}
+                                                target="_blank"
+                                                className={linkClassName}
+                                            >
+                                                {language(`main.projects.code`)}
+                                                <FaGithub className="quad:text-xl"/>
+                                            </Link>
+                                        ) : null}
                                         {project.links.demo ? (
                                             <Link
                                                 href={project.links.demo}

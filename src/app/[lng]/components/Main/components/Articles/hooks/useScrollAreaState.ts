@@ -6,7 +6,7 @@ interface ScrollState {
     isScrolledEnd: boolean;
 }
 
-export function useScrollAreaState(): [RefCallback<HTMLElement>, ScrollState] {
+export function useScrollAreaState(): [RefCallback<HTMLElement>, ScrollState | null] {
     const [state, setState] = useState<ScrollState | null>(null);
 
     const refCallback = useCallback((node: HTMLElement | null) => {

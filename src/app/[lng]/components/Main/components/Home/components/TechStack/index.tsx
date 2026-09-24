@@ -17,18 +17,16 @@ export default async function TechStack({language}: { language: TFunction }) {
                 {language("main.home.stack")}&nbsp;&nbsp;
                 <span className="relative -top-0.5">|</span>
             </h3>
-            <div className="flex grid-rows-1 gap-8 quad:gap-12 max-lg:gap-6 max-sm:gap-4 w-full">
+            <div className="flex flex-wrap gap-8 quad:gap-12 max-lg:gap-6 max-sm:gap-2.5 w-full">
                 <Image
                     src={html as StaticImageData}
                     alt="html"
                     className="w-9 quad:w-12 max-lg:w-7 max-sm:w-5"
                 />
                 <Image
-                    width="28"
-                    height="26"
                     src={css as StaticImageData}
                     alt="css"
-                    className="w-7 quad:w-9 max-lg:w-5 max-sm:w-4"
+                    className="w-7 h-auto quad:w-9 max-lg:w-5 max-sm:w-4"
                 />
                 <Image
                     src={js as StaticImageData}
@@ -41,11 +39,9 @@ export default async function TechStack({language}: { language: TFunction }) {
                     className="w-8 quad:w-9 max-lg:w-6 max-sm:w-5"
                 />
                 <Image
-                    width="38"
-                    height="20"
                     src={react as StaticImageData}
                     alt="react"
-                    className="w-9 quad:w-12 max-lg:w-8 max-sm:w-6"
+                    className="w-9 h-auto quad:w-12 max-lg:w-8 max-sm:w-6"
                 />
                 <Image
                     src={next as StaticImageData}
